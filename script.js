@@ -4,7 +4,7 @@ var actualTemperatureNozzle = "Pending";
 var targetTemperatureNozzle = "Pending";
 var actualTemperatureBed = "Pending";
 var targetTemperatureBed = "Pending";
-var stateText = "Nothing happening now...";
+var stateText = "Nothing happening now";
 
 var interval = setInterval(refresh, refreshRate);
 
