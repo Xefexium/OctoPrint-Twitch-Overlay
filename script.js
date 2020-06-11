@@ -1,6 +1,6 @@
 var baseURL = "http://192.168.0.213";
 var refreshRate = 1000;
-var pendingText = "..."
+var pendingText = "NaN"
 var actualTemperatureNozzle = pendingText;
 var targetTemperatureNozzle = pendingText;
 var actualTemperatureBed = pendingText;
@@ -38,10 +38,10 @@ function displayData() {
     $('#estimatedPrintTime').text(estimatedPrintTime == pendingText ? pendingText : secondsToHms(estimatedPrintTime));
     $('#printTimeLeft').text(printTimeLeft == pendingText ? pendingText : secondsToHms(printTimeLeft));
     $('#printTimeElapsed').text(printTimeElapsed == pendingText ? pendingText : secondsToHms(printTimeElapsed));
-    $("#actualTemperatureNozzle").text(actualTemperatureNozzle);
-    $("#targetTemperatureNozzle").text(targetTemperatureNozzle);
-    $("#actualTemperatureBed").text(actualTemperatureBed);
-    $("#targetTemperatureBed").text(targetTemperatureBed);
+    $("#actualTemperatureNozzle").text((Math.round(actualTemperatureNozzle * 100) / 100).toFixed(2));
+    $("#targetTemperatureNozzle").text((Math.round(targetTemperatureNozzle * 100) / 100).toFixed(2));
+    $("#actualTemperatureBed").text((Math.round(actualTemperatureBed * 100) / 100).toFixed(2));
+    $("#targetTemperatureBed").text((Math.round(targetTemperatureBed * 100) / 100).toFixed(2));
   });
 }
 
@@ -98,9 +98,14 @@ function secondsToHms(d) {
   var m = Math.floor(d % 3600 / 60);
   var s = Math.floor(d % 3600 % 60);
 
-  var hDisplay = h > 0 ? h + ":" : "";
-  var mDisplay = m > 0 ? m + ":" : "";
-  var sDisplay = s > 0 ? s       : "";
+  var hDisplay = h > 0 ? h + ":" : "00:";
+  var mDisplay = m > 0 ? m + ":" : "00:";
+  var sDisplay = s > 0 ? s + ""  : "00";
+
+  hDisplay = hDisplay.length == 2 ? '0' + hDisplay : hDisplay;
+  mDisplay = mDisplay.length == 2 ? '0' + mDisplay : mDisplay;
+  sDisplay = sDisplay.length == 1 ? '0' + sDisplay : sDisplay;
+
   return hDisplay + mDisplay + sDisplay; 
 }
 
