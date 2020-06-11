@@ -34,10 +34,10 @@ function logInfo() {
 function displayData() {
   $(document).ready(function() {
     $('#jobStateText').text(jobStateText);
-    $('#percentComplete').text(percentComplete != pendingText ? percentComplete + '%' : pendingText);
-    $('#estimatedPrintTime').text(estimatedPrintTime);
-    $('#printTimeLeft').text(printTimeLeft);
-    $('#printTimeElapsed').text(printTimeElapsed);
+    $('#percentComplete').text(percentComplete != pendingText ? Math.round(percentComplete * 100) / 100 + '%' : pendingText);
+    $('#estimatedPrintTime').text(estimatedPrintTime == pendingText ? pendingText : secondsToHms(estimatedPrintTime));
+    $('#printTimeLeft').text(printTimeLeft == pendingText ? pendingText : secondsToHms(printTimeLeft));
+    $('#printTimeElapsed').text(printTimeElapsed == pendingText ? pendingText : secondsToHms(printTimeElapsed));
     $("#actualTemperatureNozzle").text(actualTemperatureNozzle);
     $("#targetTemperatureNozzle").text(targetTemperatureNozzle);
     $("#actualTemperatureBed").text(actualTemperatureBed);
@@ -58,7 +58,7 @@ function getPrinterInfo() {
   let jobInfo = '/api/job';
   let jobInfoRequest = getRequest(jobInfo);
   jobInfoRequest
-  .then(printerData => setJobInfo)
+  .then(printerData => setJobInfo(printerData))
   .catch(error => {
     clearInterval(interval);
     console.log(error);
@@ -74,6 +74,7 @@ function setToolInfo(printerData) {
 }
 
 function setJobInfo(printerData) {
+  console.log(printerData);
   estimatedPrintTime = printerData.job.estimatedPrintTime;
   percentComplete = printerData.progress.completion;
   printTimeElapsed = printerData.progress.printTime;
@@ -89,5 +90,17 @@ function getRequest(url) {
       'X-Api-Key': 'BAEDF577501645078C15126E74809AA6',
     }
   });
+}
+
+function secondsToHms(d) {
+  d = Number(d);
+  var h = Math.floor(d / 3600);
+  var m = Math.floor(d % 3600 / 60);
+  var s = Math.floor(d % 3600 % 60);
+
+  var hDisplay = h > 0 ? h + ":" : "";
+  var mDisplay = m > 0 ? m + ":" : "";
+  var sDisplay = s > 0 ? s       : "";
+  return hDisplay + mDisplay + sDisplay; 
 }
 
