@@ -10,3 +10,8 @@
     border-color: white;
     border-style: solid;
 }
+
+.printer-status div {
+    display: flex;
+    justify-content: space-between;
+}

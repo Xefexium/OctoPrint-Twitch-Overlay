@@ -8,10 +8,32 @@
 
 <body>
   <div class="printer-status">
-      <div>
-          <span class="label">Printer: </span>
-          <span id="cameraType">Creality CR-10S</span>
-        </div>
+    <div>
+      <span class="label">Printer: </span>
+      <span id="cameraType">Creality CR-10S</span>
+    </div>
+    <div>
+      <span class="label">Status: </span>
+      <span id="jobStateText"></span>
+    </div>
+    
+    <div>
+      <span class="label">Completion: </span>
+      <span id="percentComplete"></span>
+    </div>
+    <div>
+      <span class="label">Estimated Time: </span>
+      <span id="estimatedPrintTime"></span>
+    </div>
+    <div>
+      <span class="label">Time Remaining: </span>
+      <span id="printTimeLeft"></span>
+    </div>
+    <div>
+      <span class="label">Elapsed Time: </span>
+      <span id="printTimeElapsed"></span>
+    </div>
+
     <div>
       <span class="label">Actual Temp Nozzle: </span>
       <span id="actualTemperatureNozzle"></span>
@@ -27,10 +49,6 @@
     <div>
       <span class="label">Target Temp Bed: </span>
       <span id="targetTemperatureBed"></span>
-    </div>
-    <div>
-      <span class="label">Status: </span>
-      <span id="stateText"></span>
     </div>
   </div>
 </body>
