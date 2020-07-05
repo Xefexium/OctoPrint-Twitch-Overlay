@@ -1,17 +1,32 @@
-.printer-status {
-    background-color: rgba(0, 0, 0, 0.60);
-    color: white;
-    font-size: 24px;
+.container {
+    position: relative;
+    position: relative;
+    width: 420px;
+    height: 100%;
+    background-color:#06c;
     float: right;
+    background-image: linear-gradient(rgba(255,255,255,0.2) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.2) 2px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px);
+    background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
+    background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
+}
+
+.printer-status {
+    color: white;
+    font-size: 26px;
     padding: 10px;
-    width: 350px;
-    border-radius: 10px;
-    border-width: 3px 3px 3px 3px;
-    border-color: white;
-    border-style: solid;
 }
 
 .printer-status div {
     display: flex;
     justify-content: space-between;
+    font-family: "Consolas" , "monaco", monospace; ;
+}
+
+.overlay {
+    height: 51px;
+    width: 100%;
+    background-color: #06c;
 }
