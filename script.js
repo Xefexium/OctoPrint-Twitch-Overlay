@@ -39,7 +39,7 @@ function displayData() {
     $('#printTimeLeft').text(printTimeLeft == pendingText ? pendingText : secondsToHms(printTimeLeft));
     $('#printTimeElapsed').text(printTimeElapsed == pendingText ? pendingText : secondsToHms(printTimeElapsed));
     $("#temperatureBed").text((Math.round(actualTemperatureBed * 100) / 100).toFixed(2) + ' | ' + (Math.round(targetTemperatureBed * 100) / 100).toFixed(2));
-    $("#temperatureNozzle").text((Math.round(actualTemperatureNozzle * 100) / 100).toFixed(2) + ' |' + (Math.round(targetTemperatureNozzle * 100) / 100).toFixed(2));
+    $("#temperatureNozzle").text((Math.round(actualTemperatureNozzle * 100) / 100).toFixed(2) + ' | ' + (Math.round(targetTemperatureNozzle * 100) / 100).toFixed(2));
   });
 }
 
