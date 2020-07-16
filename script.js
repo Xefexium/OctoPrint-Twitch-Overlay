@@ -10,6 +10,8 @@ var percentComplete = pendingText;
 var printTimeElapsed = pendingText;
 var printTimeLeft = pendingText;
 var jobStateText = pendingText;
+var currentLayer = pendingText;
+var totalLayers = pendingText;
 
 var interval = setInterval(refresh, refreshRate);
 
@@ -29,15 +31,18 @@ function logInfo() {
   console.log(targetTemperatureNozzle);
   console.log(actualTemperatureBed);
   console.log(targetTemperatureBed);
+  console.log(currentLayer);
+  console.log(totalLayers);
 }
 
 function displayData() {
-  $(document).ready(function() {
+  $(document).ready(function () {
     $('#jobStateText').text(jobStateText);
     $('#percentComplete').text(percentComplete != pendingText ? Math.round(percentComplete * 100) / 100 + '%' : pendingText);
     $('#estimatedPrintTime').text(estimatedPrintTime == pendingText ? pendingText : secondsToHms(estimatedPrintTime));
     $('#printTimeLeft').text(printTimeLeft == pendingText ? pendingText : secondsToHms(printTimeLeft));
     $('#printTimeElapsed').text(printTimeElapsed == pendingText ? pendingText : secondsToHms(printTimeElapsed));
+    $('#layer').text(currentLayer + '/' + totalLayers);
     $("#temperatureBed").text((Math.round(actualTemperatureBed * 100) / 100).toFixed(2) + ' | ' + (Math.round(targetTemperatureBed * 100) / 100).toFixed(2));
     $("#temperatureNozzle").text((Math.round(actualTemperatureNozzle * 100) / 100).toFixed(2) + ' | ' + (Math.round(targetTemperatureNozzle * 100) / 100).toFixed(2));
   });
@@ -47,20 +52,29 @@ function getPrinterInfo() {
   let toolInfo = "/api/printer";
   let toolInfoRequest = getRequest(toolInfo);
   toolInfoRequest
-  .then(printerData => setToolInfo(printerData))
-  .catch(error => {
-    clearInterval(interval);
-    console.log(error);
-  });
-  
+    .then(printerData => setToolInfo(printerData))
+    .catch(error => {
+      clearInterval(interval);
+      console.log(error);
+    });
+
   let jobInfo = '/api/job';
   let jobInfoRequest = getRequest(jobInfo);
   jobInfoRequest
-  .then(printerData => setJobInfo(printerData))
-  .catch(error => {
-    clearInterval(interval);
-    console.log(error);
-  });
+    .then(printerData => setJobInfo(printerData))
+    .catch(error => {
+      clearInterval(interval);
+      console.log(error);
+    });
+
+  let layerInfo = '/plugin/DisplayLayerProgress/values';
+  let layerInfoRequest = getRequest(layerInfo);
+  layerInfoRequest
+    .then(printerData => setLayerInfo(printerData))
+    .catch(error => {
+      clearInterval(interval);
+      console.log(error);
+    })
 }
 
 function setToolInfo(printerData) {
@@ -72,12 +86,17 @@ function setToolInfo(printerData) {
 }
 
 function setJobInfo(printerData) {
-  console.log(printerData);
   estimatedPrintTime = printerData.job.estimatedPrintTime;
   percentComplete = printerData.progress.completion;
   printTimeElapsed = printerData.progress.printTime;
   printTimeLeft = printerData.progress.printTimeLeft;
   jobStateText = printerData.state;
+}
+
+function setLayerInfo(printerData) {
+  var layer = printerData.layer.current;
+  currentLayer = layer;
+  totalLayers = printerData.layer.total;
 }
 
 function getRequest(url) {
@@ -98,12 +117,14 @@ function secondsToHms(d) {
 
   var hDisplay = h > 0 ? h + ":" : "00:";
   var mDisplay = m > 0 ? m + ":" : "00:";
-  var sDisplay = s > 0 ? s + ""  : "00";
+  var sDisplay = s > 0 ? s + "" : "00";
 
   hDisplay = hDisplay.length == 2 ? '0' + hDisplay : hDisplay;
   mDisplay = mDisplay.length == 2 ? '0' + mDisplay : mDisplay;
   sDisplay = sDisplay.length == 1 ? '0' + sDisplay : sDisplay;
 
-  return hDisplay + mDisplay + sDisplay; 
+  return hDisplay + mDisplay + sDisplay;
 }
+
+
 
