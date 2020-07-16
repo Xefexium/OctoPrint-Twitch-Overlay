@@ -66,15 +66,6 @@ function getPrinterInfo() {
       clearInterval(interval);
       console.log(error);
     });
-
-  let layerInfo = '/plugin/DisplayLayerProgress/values';
-  let layerInfoRequest = getRequest(layerInfo);
-  layerInfoRequest
-    .then(printerData => setLayerInfo(printerData))
-    .catch(error => {
-      clearInterval(interval);
-      console.log(error);
-    })
 }
 
 function setToolInfo(printerData) {
