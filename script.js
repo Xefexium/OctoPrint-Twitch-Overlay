@@ -1,4 +1,4 @@
-var baseURL = "http://192.168.0.213";
+var baseURL = "http://192.168.0.139:5000";
 var refreshRate = 1000;
 var pendingText = "NaN"
 var actualTemperatureNozzle = pendingText;
@@ -85,7 +85,7 @@ function getRequest(url) {
     url: baseURL + url,
     headers: {
       'Content-Type': 'application/json',
-      'X-Api-Key': 'E4271FC0942843B5B7B5843B3E62E453',
+      'X-Api-Key': '4A6C89769EE3468A8BD0F42E662B5B23',
     }
   });
 }
