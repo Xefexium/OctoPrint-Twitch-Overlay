@@ -95,7 +95,7 @@ function getRequest(url) {
     url: baseURL + url,
     headers: {
       'Content-Type': 'application/json',
-      'X-Api-Key': '4A6C89769EE3468A8BD0F42E662B5B23',
+      'X-Api-Key': '64C2BD12AD804694A98594A7231FEE4E',
     }
   });
 }
