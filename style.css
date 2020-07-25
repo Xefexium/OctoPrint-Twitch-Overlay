@@ -1,32 +1,74 @@
-.container {
+body {
+    width: 100%;
+}
+
+.headers {
+    position: absolute;
+    left: 50%;
+}
+
+h1 {
     position: relative;
+    top: -50px;
+    left: -50%;
+    font-family: "Consolas" , "monaco", monospace;
+    font-size: 72px;
+    color: white;
+    text-align: center;
+}
+
+span {
     position: relative;
-    width: 420px;
-    height: 100%;
+    left: -50%;
+    top: -100px;
+    font-family: "Consolas" , "monaco", monospace;
+    font-size: 32px;
+    color: white;
+    display: table;
+    margin: 0 auto;
+}
+
+table {
+    font-family: "Consolas" , "monaco", monospace;
+    font-size: 26px;
+    color: white;
+}
+
+.table-right {
+    position: absolute;
+    left: 1470;
+}
+
+.table-left {
+    position: absolute;
+    left: 50px;
+}
+
+.label-left {
+    width: 30%;
+}
+
+.label-right {
+    width: 50%;
+}
+
+.data-left {
+    width: 50%;
+}
+
+.data-right {
+    width: 60%;
+    text-align: right;
+}
+
+.background {
+    display: flex;
+    height: 145px;
     background-color:#06c;
-    float: right;
     background-image: linear-gradient(rgba(255,255,255,0.2) 2px, transparent 2px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.2) 2px, transparent 1px),
     linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px);
     background-size:100px 100px, 100px 100px, 20px 20px, 20px 20px;
     background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px;
-}
-
-.printer-status {
-    color: white;
-    font-size: 26px;
-    padding: 10px;
-}
-
-.printer-status div {
-    display: flex;
-    justify-content: space-between;
-    font-family: "Consolas" , "monaco", monospace; ;
-}
-
-.overlay {
-    height: 51px;
-    width: 100%;
-    background-color: #06c;
 }

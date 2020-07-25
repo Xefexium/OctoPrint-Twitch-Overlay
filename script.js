@@ -1,4 +1,4 @@
-var baseURL = "http://192.168.0.139:5000";
+var baseURL = "http://10.0.0.50:5000";
 var refreshRate = 1000;
 var pendingText = "NaN"
 var actualTemperatureNozzle = pendingText;
@@ -8,10 +8,9 @@ var targetTemperatureBed = pendingText;
 var estimatedPrintTime = pendingText;
 var percentComplete = pendingText;
 var printTimeElapsed = pendingText;
-var printTimeLeft = pendingText;
 var jobStateText = pendingText;
-var currentLayer = pendingText;
-var totalLayers = pendingText;
+var currentLayer = '0';
+var totalLayers = '0';
 
 var interval = setInterval(refresh, refreshRate);
 
@@ -25,7 +24,6 @@ function logInfo() {
   console.log(jobStateText);
   console.log(percentComplete);
   console.log(estimatedPrintTime);
-  console.log(printTimeLeft);
   console.log(printTimeElapsed);
   console.log(actualTemperatureNozzle);
   console.log(targetTemperatureNozzle);
@@ -40,7 +38,6 @@ function displayData() {
     $('#jobStateText').text(jobStateText);
     $('#percentComplete').text(percentComplete != pendingText ? Math.round(percentComplete * 100) / 100 + '%' : pendingText);
     $('#estimatedPrintTime').text(estimatedPrintTime == pendingText ? pendingText : secondsToHms(estimatedPrintTime));
-    $('#printTimeLeft').text(printTimeLeft == pendingText ? pendingText : secondsToHms(printTimeLeft));
     $('#printTimeElapsed').text(printTimeElapsed == pendingText ? pendingText : secondsToHms(printTimeElapsed));
     $('#layer').text(currentLayer + '/' + totalLayers);
     $("#temperatureBed").text((Math.round(actualTemperatureBed * 100) / 100).toFixed(2) + ' | ' + (Math.round(targetTemperatureBed * 100) / 100).toFixed(2));
@@ -80,7 +77,6 @@ function setJobInfo(printerData) {
   estimatedPrintTime = printerData.job.estimatedPrintTime;
   percentComplete = printerData.progress.completion;
   printTimeElapsed = printerData.progress.printTime;
-  printTimeLeft = printerData.progress.printTimeLeft;
   jobStateText = printerData.state;
 }
 
@@ -116,6 +112,3 @@ function secondsToHms(d) {
 
   return hDisplay + mDisplay + sDisplay;
 }
-
-
-

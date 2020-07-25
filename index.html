@@ -7,39 +7,47 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="printer-status">
-      <div>
-        <span class="label">Printer: </span>
-        <span id="cameraType">Creality CR-10S</span>
-      </div>
-      <div>
-        <span class="label">Status: </span>
-        <span id="jobStateText"></span>
-      </div>
-
-      <div>
-        <span class="label">Completion: </span>
-        <span id="percentComplete"></span>
-      </div>
-      <div>
-        <span class="label">Time Left: </span>
-        <span id="printTimeLeft"></span>
-      </div>
-      <div>
-        <span class="label">Elapsed Time: </span>
-        <span id="printTimeElapsed"></span>
-      </div>
-
-      <div>
-        <span class="label">Temp Bed: </span>
-        <span id="temperatureBed"></span>
-      </div>
-      <div>
-        <span class="label">Temp Nozzle: </span>
-        <span id="temperatureNozzle"></span>
-      </div>
+  <div class="background">
+    <div class="headers">
+      <h1>3DPrintingTV</h1> <!-- Channel Name -->
+      <span>Guppy Nursery</span> <!-- Current Print-->
     </div>
+    <table class="table-left">
+      <tr>
+        <td class="label-left">Printer: </td>
+        <td class="data-left" id="cameraType">Creality CR-10S</td>
+      </tr>
+      <tr>
+        <td class="label-left">Status: </td>
+        <td class="data-left" id="jobStateText"></td>
+      </tr>
+      <tr>
+        <td class="label-left">Completion: </td>
+        <td class="data-left" id="percentComplete"></td>
+      </tr>
+      <tr>
+        <td class="label-left">Layer: </td>
+        <td class="data-left" id="layer"></td>
+      </tr>
+    </table>
+    <table class="table-right">
+      <tr>
+        <td class="label-right">Time: </td>
+        <td class="data-right" id="printTimeElapsed"></td>
+      </tr>
+      <tr>
+        <td class="label-right">Time Left: </td>
+        <td class="data-right" id="estimatedPrintTime"></td>
+      </tr>
+      <tr>
+        <td class="label-right">Bed: </td>
+        <td class="data-right" id="temperatureBed"></td>
+      </tr>
+      <tr>
+        <td class="label-right">Nozzle: </td>
+        <td class="data-right" id="temperatureNozzle"></td>
+      </tr>
+    </table>
   </div>
 </body>
 
