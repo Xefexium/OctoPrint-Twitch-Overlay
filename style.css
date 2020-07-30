@@ -20,7 +20,7 @@ h1 {
 span {
     position: relative;
     left: -50%;
-    top: -100px;
+    top: -105px;
     font-family: "Consolas" , "monaco", monospace;
     font-size: 32px;
     color: white;
@@ -36,7 +36,7 @@ table {
 
 .table-right {
     position: absolute;
-    left: 1470;
+    left: 1450px;
 }
 
 .table-left {
@@ -63,7 +63,7 @@ table {
 
 .background {
     display: flex;
-    height: 145px;
+    height: 150px;
     background-color:#06c;
     background-image: linear-gradient(rgba(255,255,255,0.2) 2px, transparent 2px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.2) 2px, transparent 1px),

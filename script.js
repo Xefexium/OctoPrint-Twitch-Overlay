@@ -1,10 +1,10 @@
 var baseURL = "http://10.0.0.50:5000";
 var refreshRate = 1000;
 var pendingText = "NaN"
-var actualTemperatureNozzle = pendingText;
-var targetTemperatureNozzle = pendingText;
-var actualTemperatureBed = pendingText;
-var targetTemperatureBed = pendingText;
+var actualTemperatureNozzle = '0';
+var targetTemperatureNozzle = '0';
+var actualTemperatureBed = '0';
+var targetTemperatureBed = '0';
 var estimatedPrintTime = pendingText;
 var percentComplete = pendingText;
 var printTimeElapsed = pendingText;
@@ -35,13 +35,17 @@ function logInfo() {
 
 function displayData() {
   $(document).ready(function () {
+    let actualBedTemp = '' + (Math.round(actualTemperatureBed * 100) / 100).toFixed(2);
+    let targetBedTemp = '' + (Math.round(targetTemperatureBed * 100) / 100).toFixed(2);
+    let actualNozzleTemp = '' + (Math.round(actualTemperatureNozzle * 100) / 100).toFixed(2);
+    let targetNozzleTemp = '' + (Math.round(targetTemperatureNozzle * 100) / 100).toFixed(2);
     $('#jobStateText').text(jobStateText);
     $('#percentComplete').text(percentComplete != pendingText ? Math.round(percentComplete * 100) / 100 + '%' : pendingText);
     $('#estimatedPrintTime').text(estimatedPrintTime == pendingText ? pendingText : secondsToHms(estimatedPrintTime));
     $('#printTimeElapsed').text(printTimeElapsed == pendingText ? pendingText : secondsToHms(printTimeElapsed));
     $('#layer').text(currentLayer + '/' + totalLayers);
-    $("#temperatureBed").text((Math.round(actualTemperatureBed * 100) / 100).toFixed(2) + ' | ' + (Math.round(targetTemperatureBed * 100) / 100).toFixed(2));
-    $("#temperatureNozzle").text((Math.round(actualTemperatureNozzle * 100) / 100).toFixed(2) + ' | ' + (Math.round(targetTemperatureNozzle * 100) / 100).toFixed(2));
+    $("#temperatureBed").text(actualBedTemp.padStart(6, ' ') + ' | ' + targetBedTemp.padStart(6, ' '));
+    $("#temperatureNozzle").text(actualNozzleTemp.padStart(6, ' ') + ' | ' + targetNozzleTemp.padStart(6, ' '));
   });
 }
 
@@ -59,6 +63,15 @@ function getPrinterInfo() {
   let jobInfoRequest = getRequest(jobInfo);
   jobInfoRequest
     .then(printerData => setJobInfo(printerData))
+    .catch(error => {
+      clearInterval(interval);
+      console.log(error);
+    });
+
+  let layerInfo = '/plugin/DisplayLayerProgress/values';
+  let layerInfoRequest = getRequest(layerInfo);
+  layerInfoRequest
+    .then(printerData => setLayerInfo(printerData))
     .catch(error => {
       clearInterval(interval);
       console.log(error);
