@@ -44,8 +44,8 @@ function displayData() {
     $('#estimatedPrintTime').text(estimatedPrintTime == pendingText ? pendingText : secondsToHms(estimatedPrintTime));
     $('#printTimeElapsed').text(printTimeElapsed == pendingText ? pendingText : secondsToHms(printTimeElapsed));
     $('#layer').text(currentLayer + '/' + totalLayers);
-    $("#temperatureBed").text(actualBedTemp.padStart(6, ' ') + ' | ' + targetBedTemp.padStart(6, ' '));
-    $("#temperatureNozzle").text(actualNozzleTemp.padStart(6, ' ') + ' | ' + targetNozzleTemp.padStart(6, ' '));
+    $("#temperatureBed").text(actualBedTemp.padStart(6, '\xa0') + ' |' + targetBedTemp.padStart(7, '\xa0'));
+    $("#temperatureNozzle").text(actualNozzleTemp.padStart(6, '\xa0') + ' |' + targetNozzleTemp.padStart(7, '\xa0'));
   });
 }
 
