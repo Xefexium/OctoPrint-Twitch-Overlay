@@ -1,4 +1,4 @@
-var baseURL = "http://10.0.0.50:5000";
+var baseURL = "http://192.168.0.100:5000";
 var refreshRate = 1000;
 var pendingText = "NaN"
 var actualTemperatureNozzle = '0';
